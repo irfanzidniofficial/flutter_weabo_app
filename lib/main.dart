@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_weabo_app/bloc/cubit/bottom_nav_cubit.dart';
+import 'package:flutter_weabo_app/bloc/anime_list/anime_list_bloc.dart';
+import 'package:flutter_weabo_app/bloc/bottom_nav/bottom_nav_cubit.dart';
 import 'package:flutter_weabo_app/presentation/detail_screen.dart';
 import 'package:flutter_weabo_app/presentation/main_screen.dart';
 import 'package:flutter_weabo_app/shared/style.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => BottomNavCubit(),
+        ),
+        BlocProvider(
+          create: (_) => AnimeListBloc(),
         )
       ],
       child: MaterialApp(

@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_weabo_app/bloc/cubit/bottom_nav_cubit.dart';
+import 'package:flutter_weabo_app/bloc/bottom_nav/bottom_nav_cubit.dart';
 import 'package:flutter_weabo_app/presentation/favorite_screen.dart';
 import 'package:flutter_weabo_app/presentation/home_screen.dart';
 import 'package:flutter_weabo_app/presentation/search_screen.dart';

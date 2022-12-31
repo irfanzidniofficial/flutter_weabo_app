@@ -1,3 +1,5 @@
+import 'anime_model.dart';
+
 class AnimeResponseModel {
   List<AnimeModel>? data;
 
@@ -7,13 +9,13 @@ class AnimeResponseModel {
     if (json['data'] != null) {
       data = <AnimeModel>[];
       json['data'].forEach((v) {
-        data!.add(new AnimeModel.fromJson(v));
+        data!.add(AnimeModel.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
