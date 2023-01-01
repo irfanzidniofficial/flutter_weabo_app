@@ -3,22 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weabo_app/bloc/anime_list/anime_list_bloc.dart';
 import 'package:flutter_weabo_app/model/anime_model.dart';
+import 'package:flutter_weabo_app/shared/style.dart';
+import 'package:flutter_weabo_app/widget/anime_item.dart';
 
 import '../shared/status_enum.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AnimeListBloc>().add(GetAnimeListEvent());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +34,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text("Maaf terjadi kesalahan"),
               );
             } else if (state.status == Status.success) {
-              return ListView.builder(
-                itemCount: state.animeList.length,
-                itemBuilder: (context, index) {
-                  final AnimeModel anime = state.animeList[index];
-                  return Container();
-                },
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Weabo App",
+                      style: Theme.of(context).textTheme.headline4!.copyWith(
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: state.animeList.length,
+                      itemBuilder: (context, index) {
+                        final AnimeModel anime = state.animeList[index];
+                        return AnimeItem(
+                            imageUrl: anime.images!.jpg!.imageUrl!,
+                            title: anime.title!,
+                            score: anime.score!,
+                            status: anime.status!,
+                            synopsis: anime.synopsis!);
+                      },
+                    ),
+                  ),
+                ],
               );
             }
 

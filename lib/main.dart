@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           create: (_) => BottomNavCubit(),
         ),
         BlocProvider(
-          create: (_) => AnimeListBloc(),
+          create: (_) => AnimeListBloc()..add(GetAnimeListEvent()),
         )
       ],
       child: MaterialApp(

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_weabo_app/model/anime_model.dart';
 import 'package:flutter_weabo_app/model/anime_response_modal.dart';
 
 class Service {
@@ -17,9 +18,16 @@ class Service {
         },
       );
 
-      print(response.data);
-
       return AnimeResponseModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<AnimeModel> getDetail(int id) async {
+    try {
+      final Response response = await Dio().get("$baseUrl/$id");
+      return AnimeModel.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
