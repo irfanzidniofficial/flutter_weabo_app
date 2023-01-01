@@ -2,7 +2,7 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weabo_app/bloc/anime_list/anime_list_bloc.dart';
-import 'package:flutter_weabo_app/model/anime_model.dart';
+import 'package:flutter_weabo_app/model/remote/anime_model.dart';
 import 'package:flutter_weabo_app/shared/style.dart';
 import 'package:flutter_weabo_app/widget/anime_item.dart';
 

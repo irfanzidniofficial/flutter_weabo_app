@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_weabo_app/model/anime_detail_model.dart';
-import 'package:flutter_weabo_app/model/anime_response_modal.dart';
+import 'package:flutter_weabo_app/model/remote/anime_detail_model.dart';
+import 'package:flutter_weabo_app/model/remote/anime_response_modal.dart';
 
 class Service {
   static const String baseUrl = "https://api.jikan.moe/v4/anime";

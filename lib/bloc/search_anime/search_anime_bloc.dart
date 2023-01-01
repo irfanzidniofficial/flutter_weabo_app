@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_weabo_app/model/anime_model.dart';
+import 'package:flutter_weabo_app/model/remote/anime_model.dart';
 import 'package:flutter_weabo_app/services/service.dart';
 import 'package:flutter_weabo_app/shared/status_enum.dart';
 

@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weabo_app/bloc/anime_detail/anime_detail_bloc.dart';
-import 'package:flutter_weabo_app/model/anime_detail_model.dart';
+import 'package:flutter_weabo_app/bloc/toogle_favorite/toogle_favorite_bloc.dart';
+import 'package:flutter_weabo_app/model/local/anime_entity.dart';
+import 'package:flutter_weabo_app/model/remote/anime_detail_model.dart';
 
 import 'package:flutter_weabo_app/route_argument/detail_arguments.dart';
 import 'package:flutter_weabo_app/shared/style.dart';
@@ -104,6 +106,60 @@ class _DetailScreenState extends State<DetailScreen> {
                               ],
                             ),
                           ),
+                        ),
+                        BlocBuilder<ToogleFavoriteBloc, ToogleFavoriteState>(
+                          builder: (context, state) {
+                            return Positioned(
+                              top: 10,
+                              right: 10,
+                              child: Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                  color: primaryColor,
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    final AnimeEntity animeEntity = AnimeEntity(
+                                        imageUrl: animeDetail
+                                            .data!.images!.jpg!.imageUrl!,
+                                        id: animeDetail.data!.malId!,
+                                        title: animeDetail.data!.title!,
+                                        score: animeDetail.data!.score!,
+                                        status: animeDetail.data!.status!,
+                                        synopsis: animeDetail.data!.status!);
+
+                                    context.read<ToogleFavoriteBloc>().add(
+                                          AddToFavorite(
+                                            animeEntity: animeEntity,
+                                          ),
+                                        );
+                                  },
+
+                                  //   if (state.isFavorite) {
+                                  //     context.read<ToogleFavoriteBloc>().add(
+                                  //           RemoveFromFavorite(
+                                  //               animeEntity: animeEntity),
+                                  //         );
+                                  //   } else {
+                                  //     context.read<ToogleFavoriteBloc>().add(
+                                  //           AddToFavorite(
+                                  //               animeEntity: animeEntity),
+                                  //         );
+                                  //   }
+                                  // },
+
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    color: state.isFavorite
+                                        ? Colors.pink
+                                        : whiteColor,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         )
                       ],
                     ),
