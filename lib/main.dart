@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_weabo_app/bloc/anime_detail/anime_detail_bloc.dart';
 import 'package:flutter_weabo_app/bloc/anime_list/anime_list_bloc.dart';
 import 'package:flutter_weabo_app/bloc/bottom_nav/bottom_nav_cubit.dart';
+import 'package:flutter_weabo_app/bloc/search_anime/search_anime_bloc.dart';
 import 'package:flutter_weabo_app/presentation/detail_screen.dart';
 import 'package:flutter_weabo_app/presentation/main_screen.dart';
 import 'package:flutter_weabo_app/route_argument/detail_arguments.dart';
@@ -28,7 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => AnimeListBloc()..add(GetAnimeListEvent()),
         ),
-        BlocProvider(create: (_) => AnimeListBloc()),
+        BlocProvider(create: (_) => AnimeDetailBloc()),
+        BlocProvider(create: (_) => SearchAnimeBloc()),
       ],
       child: MaterialApp(
         title: 'Weabo App',
@@ -44,7 +47,6 @@ class MyApp extends StatelessWidget {
         home: const MainScreen(),
         onGenerateRoute: (RouteSettings settings) {
           final arguments = settings.arguments;
-
           switch (settings.name) {
             case "/":
               return MaterialPageRoute(builder: (_) => const MainScreen());

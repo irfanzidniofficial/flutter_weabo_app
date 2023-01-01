@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_weabo_app/model/anime_model.dart';
+import 'package:flutter_weabo_app/model/anime_detail_model.dart';
 import 'package:flutter_weabo_app/model/anime_response_modal.dart';
 
 class Service {
@@ -24,10 +24,30 @@ class Service {
     }
   }
 
-  Future<AnimeModel> getDetail(int id) async {
+  Future<AnimeDetailModel> getDetail(int id) async {
     try {
       final Response response = await Dio().get("$baseUrl/$id");
-      return AnimeModel.fromJson(response.data);
+      return AnimeDetailModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<AnimeResponseModel> searchAnime(String keyword) async {
+    try {
+      final Response response = await Dio().get(
+        baseUrl,
+        queryParameters: {
+          "page": 1,
+          "limit": 10,
+          "sort": "asc",
+          "order_by": "popularity",
+          "min_score": 7,
+          "q": keyword,
+        },
+      );
+
+      return AnimeResponseModel.fromJson(response.data);
     } catch (e) {
       rethrow;
     }

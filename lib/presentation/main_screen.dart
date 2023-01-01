@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
         } else if (state == 1) {
           return const FavoriteScreen();
         } else {
-          return const SearchScreen();
+          return SearchScreen();
         }
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

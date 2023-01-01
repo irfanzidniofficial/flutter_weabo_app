@@ -19,7 +19,7 @@ class GetAnimeDetailLoading extends AnimeDetailState {
 
 class GetAnimeDetailSuccess extends AnimeDetailState {
   const GetAnimeDetailSuccess({required this.anime});
-  final AnimeModel anime;
+  final AnimeDetailModel anime;
 
   @override
   List<Object> get props => [anime];
