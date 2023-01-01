@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weabo_app/bloc/anime_detail/anime_detail_bloc.dart';
 import 'package:flutter_weabo_app/bloc/anime_list/anime_list_bloc.dart';
 import 'package:flutter_weabo_app/bloc/bottom_nav/bottom_nav_cubit.dart';
+import 'package:flutter_weabo_app/bloc/favorite_anime_list/favorite_anime_list_bloc.dart';
 import 'package:flutter_weabo_app/bloc/search_anime/search_anime_bloc.dart';
 import 'package:flutter_weabo_app/bloc/toogle_favorite/toogle_favorite_bloc.dart';
 import 'package:flutter_weabo_app/presentation/detail_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => AnimeDetailBloc()),
         BlocProvider(create: (_) => SearchAnimeBloc()),
         BlocProvider(create: (_) => ToogleFavoriteBloc()),
+        BlocProvider(create: (_) => FavoriteAnimeListBloc()),
       ],
       child: MaterialApp(
         title: 'Weabo App',

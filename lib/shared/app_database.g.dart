@@ -151,6 +151,19 @@ class _$AnimeDao extends AnimeDao {
   }
 
   @override
+  Future<AnimeEntity?> checkIsFavorite(int id) async {
+    return _queryAdapter.query('SELECT * FROM AnimeEntity WHERE id= ?1',
+        mapper: (Map<String, Object?> row) => AnimeEntity(
+            imageUrl: row['imageUrl'] as String,
+            id: row['id'] as int,
+            title: row['title'] as String,
+            score: row['score'] as double,
+            status: row['status'] as String,
+            synopsis: row['synopsis'] as String),
+        arguments: [id]);
+  }
+
+  @override
   Future<int> addToFavorite(AnimeEntity animeEntity) {
     return _animeEntityInsertionAdapter.insertAndReturnId(
         animeEntity, OnConflictStrategy.abort);

@@ -20,5 +20,13 @@ class RemoveFromFavorite extends ToogleFavoriteEvent {
 
   const RemoveFromFavorite({required this.animeEntity});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [animeEntity];
+}
+
+class CheckIsFavorite extends ToogleFavoriteEvent {
+  final int id;
+  const CheckIsFavorite({required this.id});
+
+  @override
+  List<Object> get props => [id];
 }

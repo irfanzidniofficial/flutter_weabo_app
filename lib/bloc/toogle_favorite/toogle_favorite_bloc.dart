@@ -17,19 +17,17 @@ class ToogleFavoriteBloc
             await $FloorAppDatabase.databaseBuilder('app_database.db').build();
         final animeDao = database.animeDao;
         final int result = await animeDao.addToFavorite(event.animeEntity);
+
         if (result > 0) {
           emit(state.copyWith(status: Status.success, isFavorite: true));
         } else {
           emit(
-            state.copyWith(
-                status: Status.error,
-                errorMessage: "Gagal menambahkan favorite"),
+            state.copyWith(status: Status.error, errorMessage: ""),
           );
         }
       } catch (e) {
         emit(
-          state.copyWith(
-              status: Status.error, errorMessage: "Gagal menambahkan favorite"),
+          state.copyWith(status: Status.error, errorMessage: ""),
         );
       }
     });
@@ -39,18 +37,35 @@ class ToogleFavoriteBloc
             await $FloorAppDatabase.databaseBuilder('app_database.db').build();
         final animeDao = database.animeDao;
         final int result = await animeDao.removeFromFavorite(event.animeEntity);
+
         if (result > 0) {
           emit(state.copyWith(status: Status.success, isFavorite: false));
         } else {
           emit(
-            state.copyWith(
-                status: Status.error, errorMessage: "Gagal menghapus favorite"),
+            state.copyWith(status: Status.error, errorMessage: ""),
           );
         }
       } catch (e) {
         emit(
-          state.copyWith(
-              status: Status.error, errorMessage: "Gagal menghapus favorite"),
+          state.copyWith(status: Status.error, errorMessage: ""),
+        );
+      }
+    });
+    on<CheckIsFavorite>((event, emit) async {
+      try {
+        final database =
+            await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+        final animeDao = database.animeDao;
+        final result = await animeDao.checkIsFavorite(event.id);
+
+        if (result != null) {
+          emit(state.copyWith(isFavorite: true, status: Status.success));
+        } else {
+          emit(state.copyWith(isFavorite: false, status: Status.success));
+        }
+      } catch (e) {
+        emit(
+          state.copyWith(status: Status.error, errorMessage: ""),
         );
       }
     });

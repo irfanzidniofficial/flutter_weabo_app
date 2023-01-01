@@ -11,4 +11,7 @@ abstract class AnimeDao {
 
   @delete
   Future<int> removeFromFavorite(AnimeEntity animeEntity);
+
+  @Query("SELECT * FROM AnimeEntity WHERE id= :id")
+  Future<AnimeEntity?> checkIsFavorite(int id);
 }

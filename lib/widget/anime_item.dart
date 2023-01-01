@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_weabo_app/bloc/favorite_anime_list/favorite_anime_list_bloc.dart';
 import 'package:flutter_weabo_app/route_argument/detail_arguments.dart';
 import 'package:flutter_weabo_app/shared/style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnimeItem extends StatelessWidget {
   final String imageUrl;
@@ -25,10 +27,17 @@ class AnimeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(
+        Navigator.of(context)
+            .pushNamed(
           '/detail',
-          arguments: DetailArguments(title: title, id: malId),
-        );
+          arguments: DetailArguments(
+            title: title,
+            id: malId,
+          ),
+        )
+            .then((_) {
+          context.read<FavoriteAnimeListBloc>().add(GetFavoriteAnime());
+        });
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),

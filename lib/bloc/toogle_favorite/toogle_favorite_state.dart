@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'toogle_favorite_bloc.dart';
 
 class ToogleFavoriteState extends Equatable {
@@ -14,16 +13,14 @@ class ToogleFavoriteState extends Equatable {
 
   factory ToogleFavoriteState.initial() {
     return const ToogleFavoriteState(
+      status: Status.initial,
       isFavorite: false,
       errorMessage: "",
-      status: Status.initial,
     );
   }
 
   @override
   List<Object> get props => [isFavorite, errorMessage];
-
- 
 
   ToogleFavoriteState copyWith({
     Status? status,

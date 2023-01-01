@@ -27,6 +27,9 @@ class _DetailScreenState extends State<DetailScreen> {
     context
         .read<AnimeDetailBloc>()
         .add(GetAnimeDetailEvent(id: widget.detailArguments.id));
+    context
+        .read<ToogleFavoriteBloc>()
+        .add(CheckIsFavorite(id: widget.detailArguments.id));
   }
 
   @override
@@ -130,26 +133,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                         status: animeDetail.data!.status!,
                                         synopsis: animeDetail.data!.status!);
 
-                                    context.read<ToogleFavoriteBloc>().add(
-                                          AddToFavorite(
-                                            animeEntity: animeEntity,
-                                          ),
-                                        );
+                                    if (state.isFavorite) {
+                                      context.read<ToogleFavoriteBloc>().add(
+                                            RemoveFromFavorite(
+                                                animeEntity: animeEntity),
+                                          );
+                                    } else {
+                                      context.read<ToogleFavoriteBloc>().add(
+                                            AddToFavorite(
+                                                animeEntity: animeEntity),
+                                          );
+                                    }
                                   },
-
-                                  //   if (state.isFavorite) {
-                                  //     context.read<ToogleFavoriteBloc>().add(
-                                  //           RemoveFromFavorite(
-                                  //               animeEntity: animeEntity),
-                                  //         );
-                                  //   } else {
-                                  //     context.read<ToogleFavoriteBloc>().add(
-                                  //           AddToFavorite(
-                                  //               animeEntity: animeEntity),
-                                  //         );
-                                  //   }
-                                  // },
-
                                   icon: Icon(
                                     Icons.favorite,
                                     color: state.isFavorite
