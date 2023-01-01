@@ -4,6 +4,7 @@ import 'package:flutter_weabo_app/bloc/anime_list/anime_list_bloc.dart';
 import 'package:flutter_weabo_app/bloc/bottom_nav/bottom_nav_cubit.dart';
 import 'package:flutter_weabo_app/presentation/detail_screen.dart';
 import 'package:flutter_weabo_app/presentation/main_screen.dart';
+import 'package:flutter_weabo_app/route_argument/detail_arguments.dart';
 import 'package:flutter_weabo_app/shared/style.dart';
 
 import 'bloc/bloc_observer.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => AnimeListBloc()..add(GetAnimeListEvent()),
-        )
+        ),
+        BlocProvider(create: (_) => AnimeListBloc()),
       ],
       child: MaterialApp(
         title: 'Weabo App',
@@ -47,7 +49,12 @@ class MyApp extends StatelessWidget {
             case "/":
               return MaterialPageRoute(builder: (_) => const MainScreen());
             case "/detail":
-              return MaterialPageRoute(builder: (_) => const DetailScreen());
+              final args = arguments as DetailArguments;
+              return MaterialPageRoute(
+                builder: (_) => DetailScreen(
+                  detailArguments: args,
+                ),
+              );
           }
           return null;
         },

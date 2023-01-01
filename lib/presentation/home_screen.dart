@@ -53,6 +53,7 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final AnimeModel anime = state.animeList[index];
                         return AnimeItem(
+                            malId: anime.malId!,
                             imageUrl: anime.images!.jpg!.imageUrl!,
                             title: anime.title!,
                             score: anime.score!,
